@@ -15,3 +15,5 @@ dotnet sln add .\P02WeatherForecastApp\P02WeatherForecastApp.csproj
  - mapowanie klas https://json2csharp.com/
  - przechowywanie danych w sekretach i konfiguracji 
 
+6) MVVM, DB, DI
+
