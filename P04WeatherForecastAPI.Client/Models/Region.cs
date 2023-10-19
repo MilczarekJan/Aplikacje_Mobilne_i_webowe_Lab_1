@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace P04WeatherForecastAPI.Client.Models
 {
-internal class Region
+public class Region
 {
-    public string ID { get; set; }
-    public string LocalizedName { get; set; }
-    public string EnglishName { get; set; }
+        public string regionName;
+        public Region(string regionName) {  this.regionName = regionName; }
 }
 }

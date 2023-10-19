@@ -88,15 +88,16 @@ namespace P04WeatherForecastAPI.Client.Services
             }
         }
 
-        public async Task<AdministrativeArea> GetAdminInfo(string cityKey)
+        public async Task<Region> GetAdminInfo(string cityKey)
         {
             string uri = base_url + "/" + string.Format(info_endpoint, cityKey, api_key, language);
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetAsync(uri);
                 string json = await response.Content.ReadAsStringAsync();
-                AdministrativeArea adminInfo = JsonConvert.DeserializeObject<AdministrativeArea>(json);
-                return adminInfo;
+                dynamic adminInfo = JsonConvert.DeserializeObject<dynamic>(json);
+                Region region = new Region(adminInfo["AdministrativeArea"]["LocalizedName"].ToString());
+                return region;
             }
         }
 

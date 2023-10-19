@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace P04WeatherForecastAPI.Client.ViewModels
 {
-    public class AdminViewModel
+    public class RegionViewModel
     {
-        internal AdminViewModel(AdministrativeArea administrativeArea)
+        internal RegionViewModel(Region administrativeArea)
         {
-            FoundName = administrativeArea.LocalizedName;
+            FoundName = administrativeArea.regionName;
         }
         public string FoundName { get; set; }
     }
