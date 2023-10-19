@@ -14,7 +14,7 @@ namespace P04WeatherForecastAPI.Client.Services
         Task<string> GetNearby(string cityKey);
         Task<string> GetPredictionOneDay(string cityKey);
         Task<string> GetPredictionOneHour(string cityKey);
-        Task<string> GetAdminInfo(string cityKey);
+        Task<AdministrativeArea> GetAdminInfo(string cityKey);
         Task<string> GetPastInfo(string cityKey);
     }
 }

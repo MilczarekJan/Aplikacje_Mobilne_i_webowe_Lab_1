@@ -19,7 +19,7 @@
             <Label  HorizontalAlignment="Center" Content="is:"></Label>
             <Label x:Name="lblTemperatureValue" Content="{Binding WeatherView.CurrentTemperature}" HorizontalAlignment="Center"></Label>
             <Label HorizontalAlignment="Center" Content="Administrative area:"></Label>
-            <Label x:Name="lblAdminValue" HorizontalAlignment="Center" Content=".."></Label>
+            <Label x:Name="lblAdminValue" HorizontalAlignment="Center" Content="{Binding AdminView.FoundName}"></Label>
             <Label HorizontalAlignment="Center" Content="Nearest Neighbour is:"></Label>
             <Label x:Name="lblNeighbourValue" HorizontalAlignment="Center" Content=".."></Label>
             <Label HorizontalAlignment="Center" Content="Weather in 1h:"></Label>

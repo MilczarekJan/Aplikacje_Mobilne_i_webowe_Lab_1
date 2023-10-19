@@ -22,7 +22,7 @@ namespace P04WeatherForecastAPI.Client.Services
         private const string info_endpoint = "locations/v1/{0}?apikey={1}&language{2}"; //4ty endpoint
         private const string past_endpoint = "currentconditions/v1/{0}/historical/24?apikey={1}&language{2}";//5ty endpoint
 
-        private const string api_key = "XFLRjdOLGE0JmlAUDgiGBtt02y7xJR4X";//NaxGb8AV0GCoLxsoM7TB9S3iW46VnulR XFLRjdOLGE0JmlAUDgiGBtt02y7xJR4X
+        private const string api_key = "NaxGb8AV0GCoLxsoM7TB9S3iW46VnulR";//NaxGb8AV0GCoLxsoM7TB9S3iW46VnulR XFLRjdOLGE0JmlAUDgiGBtt02y7xJR4X
         //string api_key;
         //private const string language = "pl";
         string language;
@@ -88,15 +88,15 @@ namespace P04WeatherForecastAPI.Client.Services
             }
         }
 
-        public async Task<string> GetAdminInfo(string cityKey)
+        public async Task<AdministrativeArea> GetAdminInfo(string cityKey)
         {
             string uri = base_url + "/" + string.Format(info_endpoint, cityKey, api_key, language);
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetAsync(uri);
                 string json = await response.Content.ReadAsStringAsync();
-                dynamic adminInfo = JsonConvert.DeserializeObject<dynamic>(json);
-                return adminInfo["AdministrativeArea"]["EnglishName"].ToString();
+                AdministrativeArea adminInfo = JsonConvert.DeserializeObject<AdministrativeArea>(json);
+                return adminInfo;
             }
         }
 

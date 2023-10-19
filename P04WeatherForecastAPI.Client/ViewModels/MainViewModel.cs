@@ -22,6 +22,8 @@ namespace P04WeatherForecastAPI.Client.ViewModels
     {
         private CityViewModel _selectedCity;
         private Weather _weather;
+        private Neighbour _neighbour;
+        private AdministrativeArea _administrativeArea;
         private readonly IAccuWeatherService _accuWeatherService;
 
         public MainViewModel(IAccuWeatherService accuWeatherService)//, FavoriteCityViewModel favoriteCityViewModel, FavoriteCitiesView favoriteCitiesView
@@ -33,6 +35,9 @@ namespace P04WeatherForecastAPI.Client.ViewModels
         [ObservableProperty]
         private WeatherViewModel weatherView;
 
+        [ObservableProperty]
+        private AdminViewModel adminView;
+
 
         public CityViewModel SelectedCity
         {
@@ -42,6 +47,7 @@ namespace P04WeatherForecastAPI.Client.ViewModels
                 _selectedCity = value;
                 OnPropertyChanged();
                 LoadWeather();
+                LoadAdminArea();
             }
         }
 
@@ -52,6 +58,16 @@ namespace P04WeatherForecastAPI.Client.ViewModels
             {
                 _weather = await _accuWeatherService.GetCurrentConditions(SelectedCity.Key);
                 WeatherView = new WeatherViewModel(_weather);
+            }
+        }
+
+
+        private async void LoadAdminArea()
+        {
+            if (SelectedCity != null)
+            {
+                _administrativeArea = await _accuWeatherService.GetAdminInfo(SelectedCity.Key);
+                AdminView = new AdminViewModel(_administrativeArea);
             }
         }
 
