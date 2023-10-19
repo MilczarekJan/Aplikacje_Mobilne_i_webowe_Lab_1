@@ -1,5 +1,6 @@
 ﻿using P04WeatherForecastAPI.Client.Models;
 using P04WeatherForecastAPI.Client.Services;
+using P04WeatherForecastAPI.Client.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +23,15 @@ namespace P04WeatherForecastAPI.Client
     /// </summary>
     public partial class MainWindow : Window
     {
-        AccuWeatherService accuWeatherService;
-        public MainWindow()
+        private readonly MainViewModel _viewModel;
+        public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
-            accuWeatherService = new AccuWeatherService();
+            _viewModel = viewModel;
+            DataContext = _viewModel;
+            //accuWeatherService = new AccuWeatherService();
         }
-
+        /*
         private async void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             
@@ -41,12 +44,6 @@ namespace P04WeatherForecastAPI.Client
 
             // teraz musimy skorzystac z bindowania danych bo chcemy w naszej kontrolce przechowywac takze id miasta 
             lbData.ItemsSource = cities;
-        }
-
-        private async void btnNearby_Click(object sender, RoutedEventArgs e) 
-        {
-            //City[] cities= await accuWeatherService.GetLocations(txtCity.Text);
-            //lbData.ItemsSource = cities;
         }
 
         private async void lbData_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -70,5 +67,6 @@ namespace P04WeatherForecastAPI.Client
                 lblYesterdayValue.Content = yesterdayValue;//moje5
             }
         }
+        */
     }
 }

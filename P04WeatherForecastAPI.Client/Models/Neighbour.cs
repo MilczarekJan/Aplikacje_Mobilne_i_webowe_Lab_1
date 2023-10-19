@@ -9,22 +9,14 @@ namespace P04WeatherForecastAPI.Client.Models
 
 internal class Neighbour
 {
-    public int Version { get; set; }
-    public string Key { get; set; }
-    public string Type { get; set; }
-    public int Rank { get; set; }
-    public string LocalizedName { get; set; }
-    public string EnglishName { get; set; }
-    public string PrimaryPostalCode { get; set; }
-    public Region Region { get; set; }
-    public Country Country { get; set; }
-    public AdministrativeArea AdministrativeArea { get; set; }
-    public TimeZone TimeZone { get; set; }
-    public GeoPosition GeoPosition { get; set; }
-    public bool IsAlias { get; set; }
-    public ParentCity ParentCity { get; set; }
-    public SupplementalAdminArea[] SupplementalAdminAreas { get; set; }
-    public string[] DataSets { get; set; }
+        private string LocalizedName;
+        public Neighbour(string LocalizedName) { 
+            this.LocalizedName = LocalizedName;
+        }
+        public string GetLocalizedName()
+        {
+            return this.LocalizedName;
+        }
 }
 
 }
