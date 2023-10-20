@@ -65,7 +65,7 @@ namespace P04WeatherForecastAPI.Client.Services
             }
         }
 
-        public async Task<string> GetPredictionOneDay(string cityKey)
+        public async Task<Hour> GetPredictionOneDay(string cityKey)
         {
             string uri = base_url + "/" + string.Format(tomorrow_endpoint, cityKey, api_key, language);
             using (HttpClient client = new HttpClient())
@@ -73,7 +73,8 @@ namespace P04WeatherForecastAPI.Client.Services
                 var response = await client.GetAsync(uri);
                 string json = await response.Content.ReadAsStringAsync();
                 dynamic weatherTomorrow = JsonConvert.DeserializeObject<dynamic>(json);
-                return weatherTomorrow["DailyForecasts"][0]["Day"]["IconPhrase"].ToString();
+                Hour wTomorrow = new Hour(weatherTomorrow["DailyForecasts"][0]["Day"]["IconPhrase"].ToString());
+                return wTomorrow;
             }
         }
 

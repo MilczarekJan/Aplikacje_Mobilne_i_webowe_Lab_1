@@ -26,6 +26,7 @@ namespace P04WeatherForecastAPI.Client.ViewModels
         private Region _administrativeArea;
         private Hour _hour;
         private Hour _yesterday;
+        private Hour _tomorrow;
 
         private readonly IAccuWeatherService _accuWeatherService;
 
@@ -50,6 +51,9 @@ namespace P04WeatherForecastAPI.Client.ViewModels
         [ObservableProperty]
         private YesterdayViewModel yesterdayView;
 
+        [ObservableProperty]
+        private TomorrowViewModel tomorrowView;
+
 
         public CityViewModel SelectedCity
         {
@@ -63,6 +67,7 @@ namespace P04WeatherForecastAPI.Client.ViewModels
                 LoadNeighbour();
                 LoadOneHour();
                 LoadYesterday();
+                LoadTomorrow();
             }
         }
 
@@ -109,7 +114,16 @@ namespace P04WeatherForecastAPI.Client.ViewModels
             if (SelectedCity != null)
             {
                 _yesterday = await _accuWeatherService.GetPastInfo(SelectedCity.Key);
-                YesterdayView = new YesterdayViewModel(_hour);
+                YesterdayView = new YesterdayViewModel(_yesterday);
+            }
+        }
+
+        private async void LoadTomorrow()
+        {
+            if (SelectedCity != null)
+            {
+                _tomorrow = await _accuWeatherService.GetPredictionOneDay(SelectedCity.Key);
+                TomorrowView = new TomorrowViewModel(_tomorrow);
             }
         }
 

@@ -25,7 +25,7 @@
             <Label HorizontalAlignment="Center" Content="Weather in 1h:"></Label>
             <Label x:Name="lblHourValue" HorizontalAlignment="Center" Content="{Binding HourView.PhraseText}"></Label>
             <Label HorizontalAlignment="Center" Content="Weather tomorrow:"></Label>
-            <Label x:Name="lblTomorrowValue" HorizontalAlignment="Center" Content=".."></Label>
+            <Label x:Name="lblTomorrowValue" HorizontalAlignment="Center" Content="{Binding YesterdayView.PhraseText}"></Label>
             <Label HorizontalAlignment="Center" Content="Weather yesterday:"></Label>
             <Label x:Name="lblYesterdayValue" HorizontalAlignment="Center" Content="{Binding YesterdayView.PhraseText}"></Label>
         </StackPanel>
