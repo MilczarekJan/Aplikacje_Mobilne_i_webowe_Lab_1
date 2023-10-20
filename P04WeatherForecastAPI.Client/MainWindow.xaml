@@ -27,7 +27,7 @@
             <Label HorizontalAlignment="Center" Content="Weather tomorrow:"></Label>
             <Label x:Name="lblTomorrowValue" HorizontalAlignment="Center" Content=".."></Label>
             <Label HorizontalAlignment="Center" Content="Weather yesterday:"></Label>
-            <Label x:Name="lblYesterdayValue" HorizontalAlignment="Center" Content=".."></Label>
+            <Label x:Name="lblYesterdayValue" HorizontalAlignment="Center" Content="{Binding YesterdayView.PhraseText}"></Label>
         </StackPanel>
     </DockPanel>
 </Window>
