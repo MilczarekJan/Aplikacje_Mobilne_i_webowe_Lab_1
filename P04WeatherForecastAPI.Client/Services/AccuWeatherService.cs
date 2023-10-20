@@ -51,7 +51,7 @@ namespace P04WeatherForecastAPI.Client.Services
                 return cities;
             }
         }
-        public async Task<string> GetNearby(string cityKey)
+        public async Task<Neighbour> GetNearby(string cityKey)
         {
             string uri = base_url + "/" + string.Format(nearby_cities_endpoint, cityKey, api_key, language);
             using (HttpClient client = new HttpClient())
@@ -60,7 +60,8 @@ namespace P04WeatherForecastAPI.Client.Services
                 string json = await response.Content.ReadAsStringAsync();
                 dynamic neighbours = JsonConvert.DeserializeObject<dynamic>(json);
                 dynamic firstNeighbour = neighbours[0];
-                return firstNeighbour["LocalizedName"].ToString();
+                Neighbour fNeighbour = new Neighbour(firstNeighbour["LocalizedName"].ToString());
+                return fNeighbour;
             }
         }
 
