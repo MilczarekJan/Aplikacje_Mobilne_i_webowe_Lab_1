@@ -23,7 +23,7 @@
             <Label HorizontalAlignment="Center" Content="Nearest Neighbour is:"></Label>
             <Label x:Name="lblNeighbourValue" HorizontalAlignment="Center" Content="{Binding NeighbourView.NeighbourName}"></Label>
             <Label HorizontalAlignment="Center" Content="Weather in 1h:"></Label>
-            <Label x:Name="lblHourValue" HorizontalAlignment="Center" Content=".."></Label>
+            <Label x:Name="lblHourValue" HorizontalAlignment="Center" Content="{Binding HourView.PhraseText}"></Label>
             <Label HorizontalAlignment="Center" Content="Weather tomorrow:"></Label>
             <Label x:Name="lblTomorrowValue" HorizontalAlignment="Center" Content=".."></Label>
             <Label HorizontalAlignment="Center" Content="Weather yesterday:"></Label>

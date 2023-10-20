@@ -77,7 +77,7 @@ namespace P04WeatherForecastAPI.Client.Services
             }
         }
 
-        public async Task<string> GetPredictionOneHour(string cityKey)
+        public async Task<Hour> GetPredictionOneHour(string cityKey)
         {
             string uri = base_url + "/" + string.Format(hour_endpoint, cityKey, api_key, language);
             using (HttpClient client = new HttpClient())
@@ -85,7 +85,8 @@ namespace P04WeatherForecastAPI.Client.Services
                 var response = await client.GetAsync(uri);
                 string json = await response.Content.ReadAsStringAsync();
                 dynamic weatherHour = JsonConvert.DeserializeObject<dynamic>(json);
-                return weatherHour[0]["IconPhrase"].ToString();
+                Hour wHour = new Hour(weatherHour[0]["IconPhrase"].ToString());//weatherHour[0]["IconPhrase"].ToString()
+                return wHour;
             }
         }
 

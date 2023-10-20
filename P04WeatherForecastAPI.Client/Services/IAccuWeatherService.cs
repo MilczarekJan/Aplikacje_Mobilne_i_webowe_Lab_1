@@ -13,7 +13,7 @@ namespace P04WeatherForecastAPI.Client.Services
         Task<Weather> GetCurrentConditions(string cityKey);
         Task<Neighbour> GetNearby(string cityKey);
         Task<string> GetPredictionOneDay(string cityKey);
-        Task<string> GetPredictionOneHour(string cityKey);
+        Task<Hour> GetPredictionOneHour(string cityKey);
         Task<Region> GetAdminInfo(string cityKey);
         Task<string> GetPastInfo(string cityKey);
     }

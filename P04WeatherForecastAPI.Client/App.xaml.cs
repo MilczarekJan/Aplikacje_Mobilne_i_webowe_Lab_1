@@ -32,6 +32,7 @@ namespace P04WeatherForecastAPI.Client
             services.AddSingleton<WeatherViewModel>();
             services.AddSingleton<RegionViewModel>();
             services.AddSingleton<NeighbourViewModel>();
+            services.AddSingleton<HourViewModel>();
             services.AddSingleton<MainViewModel>();
             services.AddTransient<MainWindow>();
         }
