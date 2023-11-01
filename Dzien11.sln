@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P03WeatherForecastWPF", "P0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P04WeatherForecastAPI.Client", "P04WeatherForecastAPI.Client\P04WeatherForecastAPI.Client.csproj", "{02D78DFD-CDED-4167-88E0-5F7FFF16B733}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P05Shop.API", "..\L1\P05Shop.API\P05Shop.API.csproj", "{90CD0C11-2D2E-428B-BD36-F0E7E53FE647}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P05Shop.API", "P05Shop.API\P05Shop.API.csproj", "{90CD0C11-2D2E-428B-BD36-F0E7E53FE647}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P06Shop.Shared", "..\L1\P06Shop.Shared\P06Shop.Shared.csproj", "{13C51F37-1583-4CDB-9D55-3206A3D42218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P06Shop.Shared", "P06Shop.Shared\P06Shop.Shared.csproj", "{13C51F37-1583-4CDB-9D55-3206A3D42218}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P07Shop.DataSeeder", "..\L1\P07Shop.DataSeeder\P07Shop.DataSeeder.csproj", "{B1822BF7-7C5A-4A6A-BB9C-0BBED0C8FDA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P07Shop.DataSeeder", "P07Shop.DataSeeder\P07Shop.DataSeeder.csproj", "{B1822BF7-7C5A-4A6A-BB9C-0BBED0C8FDA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

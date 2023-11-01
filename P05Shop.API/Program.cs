@@ -5,26 +5,22 @@ using P06Shop.Shared.Services.ShoeService;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IShoeService, ShoeService>();
 
-// addScoped - obiekt jest tworzony za kazdym razem dla nowego zapytania http
-// jedno zaptranie tworzy jeden obiekt 
+// Configure app settings
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json")
+    .Build();
 
-// addTransinet obiekt jest tworzony za kazdym razem kiedy odwolujmey sie do konstuktora 
-// nawet wielokrotnie w cyklu jedengo zaptrania 
-
- //addsingleton - nowa instancja klasy tworzona jest tylko 1 na caly cykl trwania naszej aplikacji 
-
-
-
+// Register the configuration
+builder.Services.AddSingleton<IConfiguration>(configuration);
 
 var app = builder.Build();
 
@@ -36,9 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
