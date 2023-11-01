@@ -1,0 +1,25 @@
+﻿<Window x:Class="P05Shop.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Shoe Client" Height="350" Width="500">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox x:Name="ShoeIdTextBox" Width="200" PlaceholderText="Enter Shoe ID" Text="{Binding SelectedShoeId, Mode=TwoWay}" Margin="5"/>
+            <Button Content="Get Shoe" Click="GetShoe_Click" Width="100" Margin="5"/>
+            <TextBox x:Name="NameTextBox" Width="200" PlaceholderText="Enter Name" Margin="5"/>
+            <TextBox x:Name="DescriptionTextBox" Width="200" PlaceholderText="Enter Description" Margin="5"/>
+            <Button Content="Add Shoe" Click="AddShoe_Click" Width="100" Margin="5"/>
+            <Button Content="Delete Shoe" Click="DeleteShoe_Click" Width="100" Margin="5"/>
+            <Button Content="Update Shoe" Click="UpdateShoe_Click" Width="100" Margin="5"/>
+            <ListView x:Name="ShoeListView" Width="400" Height="150" ItemsSource="{Binding Shoes}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                        <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="200"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Window>
