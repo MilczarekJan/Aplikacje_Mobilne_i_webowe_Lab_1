@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P06Shop.Shared", "P06Shop.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P07Shop.DataSeeder", "P07Shop.DataSeeder\P07Shop.DataSeeder.csproj", "{B1822BF7-7C5A-4A6A-BB9C-0BBED0C8FDA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P05Shop.Client", "P05Shop.Client\P05Shop.Client.csproj", "{6A548451-8FA8-457D-AF14-275598AF39AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{B1822BF7-7C5A-4A6A-BB9C-0BBED0C8FDA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1822BF7-7C5A-4A6A-BB9C-0BBED0C8FDA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1822BF7-7C5A-4A6A-BB9C-0BBED0C8FDA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A548451-8FA8-457D-AF14-275598AF39AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A548451-8FA8-457D-AF14-275598AF39AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A548451-8FA8-457D-AF14-275598AF39AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A548451-8FA8-457D-AF14-275598AF39AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

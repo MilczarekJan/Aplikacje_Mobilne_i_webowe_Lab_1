@@ -56,8 +56,8 @@ namespace P05Shop.API.Controllers
             return "Shoe with ID " + id + " has been deleted.";
         }
 
-        [HttpPut("UpdateCity/{id}")]
-        public string UpdateCity(int id, [FromBody] Shoe updatedShoe)
+        [HttpPut("UpdateShoe/{id}")]
+        public string UpdateShoe(int id, [FromBody] Shoe updatedShoe)
         {
             return "City with ID " + id + " has been updated with new data: " +
                 $"Name: {updatedShoe.Name}, Size: {updatedShoe.ShoeSize}";
