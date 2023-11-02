@@ -47,7 +47,7 @@ namespace P05Shop.API.Controllers
         [HttpGet("GetShoe/{id}")]
         public IActionResult GetShoe([FromRoute] int id)
         {
-            return Ok(new Shoe() { Name = "Adidas" });
+            return Ok(new Shoe(id, 44.5, "Airmax", "Adidas") { Name = "Adidas" });
         }
 
         [HttpDelete("DeleteShoe/{id}")]
