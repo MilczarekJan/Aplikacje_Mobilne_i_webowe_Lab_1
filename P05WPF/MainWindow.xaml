@@ -8,7 +8,6 @@
             <TextBox x:Name="ShoeIdTextBox" Width="200" Text="{Binding SelectedShoeId, Mode=TwoWay}" Margin="5"/>
             <Button x:Name="btnSearch" Content="Get Shoe" Width="100" Margin="5" Command="{Binding GetShoeCommand}"/>
 
-            <!-- Label to display Shoe ID -->
             <Label Content="Shoe size:" />
             <Label x:Name="ShoeSizeLabel" Content="{Binding SelectedShoe.ShoeSize}" HorizontalAlignment="Left"></Label>
 

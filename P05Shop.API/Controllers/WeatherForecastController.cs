@@ -1,3 +1,4 @@
+/*
 using Microsoft.AspNetCore.Mvc;
 using P04WeatherForecastAPI.Client.Models;
 
@@ -142,3 +143,4 @@ namespace P05Shop.API.Controllers
 
     }
 }
+*/

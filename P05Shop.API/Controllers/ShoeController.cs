@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using P06Shop.Shared;
+using P06Shop.Shared.Services.ProductService;
 using P06Shop.Shared.Services.ShoeService;
 using P06Shop.Shared.Shop;
 
@@ -12,11 +13,13 @@ namespace P05Shop.API.Controllers
     {
         private readonly IShoeService _shoeService; //shoeservice, bêdzie o odpowiedziach dotycz¹cych butów
         private readonly IConfiguration _configuration;
+        private readonly ILogger<ShoeController> _logger;
 
-        public ShoeController(IShoeService shoeService, IConfiguration configuration)
+        public ShoeController(IShoeService shoeService, IConfiguration configuration, ILogger<ShoeController> logger)
         {
             _shoeService = shoeService;
             _configuration = configuration;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -35,8 +38,8 @@ namespace P05Shop.API.Controllers
         [HttpPost("addShoe")]
         public IActionResult AddingShoe([FromBody] Shoe shoe)
         {
-            if (shoe.Name == null || shoe.Description == null)
-                return BadRequest("shoe added");
+            if (shoe.Name == null || shoe.Description == null || shoe.ShoeSize == null || shoe.Id.GetType() != typeof(int))
+                return BadRequest("Wrong shoe data");
 
             var addShoeEndpoint = _configuration["ApiEndpoints:AddShoeEndpoint"];
 
@@ -45,9 +48,18 @@ namespace P05Shop.API.Controllers
 
 
         [HttpGet("GetShoe/{id}")]
-        public IActionResult GetShoe([FromRoute] int id)
+        public async Task<ActionResult<ServiceResponse<Shoe>>> GetShoe([FromRoute] int id)
         {
-            return Ok(new Shoe(id, 44.5, "Airmax", "Adidas") { Name = "Adidas" });
+
+            _logger.Log(LogLevel.Information, "Invoked GetShoe Method in controller");
+
+            var result = await _shoeService.GetShoeAsync(id);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return StatusCode(500, $"Internal server error {result.Message}");
+            //return Ok(new Shoe(id, 44.5, "Airmax", "Adidas") { Name = "Adidas" });
         }
 
         [HttpDelete("DeleteShoe/{id}")]

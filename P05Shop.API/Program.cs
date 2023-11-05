@@ -1,6 +1,9 @@
-using P05Shop.API.Services.ProductService;
+//using P05Shop.API.Services.ProductService;
+using P05Shop.API.Models;
+using P05Shop.API.Services.ShoeService;
 using P06Shop.Shared.Services.ProductService;
 using P06Shop.Shared.Services.ShoeService;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +12,13 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddScoped<IProductService, ProductService>();
+//Microsoft.EntityFrameworkCore.SqlServer
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IShoeService, ShoeService>();
 
+/*
 // Configure app settings
 var configuration = new ConfigurationBuilder()
     .SetBasePath(builder.Environment.ContentRootPath)
@@ -21,6 +27,7 @@ var configuration = new ConfigurationBuilder()
 
 // Register the configuration
 builder.Services.AddSingleton<IConfiguration>(configuration);
+*/
 
 var app = builder.Build();
 

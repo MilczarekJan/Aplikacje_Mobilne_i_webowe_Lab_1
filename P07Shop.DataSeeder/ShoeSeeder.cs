@@ -9,6 +9,7 @@ namespace P07Shop.DataSeeder
         {
             int shoeId = 1;
             var shoeFaker = new Faker<Shoe>()
+                .UseSeed(12345)
                 .RuleFor(x => x.Name, x => x.Commerce.ProductName())
                 .RuleFor(x => x.Description, x => x.Commerce.ProductDescription())
                 .RuleFor(x => x.ShoeSize, x => x.Commerce.Random.Double())

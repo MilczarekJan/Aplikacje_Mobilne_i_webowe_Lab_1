@@ -8,6 +8,7 @@ using P06Shop.Shared.Shop;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using P05WPF.Services;
+using Newtonsoft.Json.Linq;
 
 public class MyApiService : IMyApiService
 {
@@ -48,9 +49,21 @@ public class MyApiService : IMyApiService
         var uri = base_url + "/" + string.Format(shoe_endpoint, id);
         var response = await _httpClient.GetAsync(uri);
         response.EnsureSuccessStatusCode();
-        var json = await response.Content.ReadAsStringAsync();
-        Shoe shoe = JsonConvert.DeserializeObject<Shoe>(json);
-        return shoe;
+        var jsonResponse = await response.Content.ReadAsStringAsync();
+
+        var responseObj = JsonConvert.DeserializeObject<JObject>(jsonResponse);
+        bool success = responseObj.Value<bool>("success");
+
+        if (success)
+        {
+            var shoeData = responseObj["data"].ToObject<Shoe>();
+            return shoeData;
+        }
+        else
+        {
+            string errorMessage = responseObj.Value<string>("message");
+            throw new Exception(errorMessage);
+        }
     }
 
     public async Task<Shoe> DeleteShoeAsync(int id)

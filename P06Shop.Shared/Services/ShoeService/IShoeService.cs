@@ -9,6 +9,10 @@ namespace P06Shop.Shared.Services.ShoeService
 {
     public interface IShoeService
     {
+        Task<ServiceResponse<Shoe>> GetShoeAsync(int id);
         Task<ServiceResponse<List<Shoe>>> GetShoesAsync();
+        Task<ServiceResponse<Shoe>> CreateProductAsync(Shoe shoe);
+        Task<ServiceResponse<bool>> DeleteShoeAsync(int id);
+        Task<ServiceResponse<Shoe>> UpdateProductAsync(Shoe shoe);
     }
 }
