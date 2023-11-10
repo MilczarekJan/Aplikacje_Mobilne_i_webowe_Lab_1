@@ -39,8 +39,8 @@ namespace P05Shop.API.Services.ShoeService
         {
             // sposób 1 (najpierw znajdujemy potem go usuwamy): 
             var shoeToDelete = _dataContext.Shoes.FirstOrDefault(x => x.Id == id);
-            _dataContext.Shoes.Remove(shoeToDelete);  
-
+            _dataContext.Shoes.Remove(shoeToDelete);
+            await _dataContext.SaveChangesAsync();
             // sposób 2: (uzywamy attach : tylko jedno zapytanie do bazy)
             /*
             var product = new Shoe() { Id = id };

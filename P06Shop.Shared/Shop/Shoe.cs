@@ -21,5 +21,8 @@ namespace P06Shop.Shared.Shop
             this.Description = Description;
             this.Name = Name;
         }
+        public void setId(int Id) { 
+            this.Id = Id;
+        }
     }
 }

@@ -70,16 +70,28 @@ namespace P05Shop.API.Controllers
         }
 
         [HttpDelete("DeleteShoe/{id}")]
-        public string DeleteShoe(int id)
+        public async Task<ActionResult<ServiceResponse<Shoe>>> DeleteShoe(int id)
         {
-            return "Shoe with ID " + id + " has been deleted.";
+            if (id == null)
+                return BadRequest("Wrong shoe data");
+            var result = await _shoeService.DeleteShoeAsync(id);
+            if (result.Success)
+                return Ok(result);
+            else
+                return StatusCode(500, $"Internal server error {result.Message}");
         }
 
         [HttpPut("UpdateShoe/{id}")]
-        public string UpdateShoe(int id, [FromBody] Shoe updatedShoe)
+        public async Task<ActionResult<ServiceResponse<Shoe>>> UpdateShoe(int id, [FromBody] Shoe updatedShoe)
         {
-            return "City with ID " + id + " has been updated with new data: " +
-                $"Name: {updatedShoe.Name}, Size: {updatedShoe.ShoeSize}";
+            if (id == null)
+                return BadRequest("Wrong shoe data");
+            updatedShoe.setId(id);
+            var result = await _shoeService.UpdateShoeAsync(updatedShoe);
+            if (result.Success)
+                return Ok(result);
+            else
+                return StatusCode(500, $"Internal server error {result.Message}");
         }
 
     }
