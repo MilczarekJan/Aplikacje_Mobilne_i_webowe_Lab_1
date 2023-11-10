@@ -15,7 +15,7 @@ namespace P05Shop.API.Services.ShoeService
             _dataContext = context;
         }
 
-        public async Task<ServiceResponse<Shoe>> CreateProductAsync(Shoe shoe)
+        public async Task<ServiceResponse<Shoe>> CreateShoeAsync(Shoe shoe)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace P05Shop.API.Services.ShoeService
 
         }
 
-        public async Task<ServiceResponse<Shoe>> UpdateProductAsync(Shoe shoe)
+        public async Task<ServiceResponse<Shoe>> UpdateShoeAsync(Shoe shoe)
         {
             try
             {

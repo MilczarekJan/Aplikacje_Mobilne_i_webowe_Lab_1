@@ -21,7 +21,8 @@ namespace P05Shop.API.Models
 
             modelBuilder.Entity<Shoe>()
                 .Property(p => p.Id)
-                .IsRequired();
+                .IsRequired()
+                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Shoe>()
                 .Property(p => p.ShoeSize)

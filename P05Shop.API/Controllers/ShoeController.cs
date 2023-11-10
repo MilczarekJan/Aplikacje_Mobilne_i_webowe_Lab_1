@@ -4,6 +4,7 @@ using P06Shop.Shared;
 using P06Shop.Shared.Services.ProductService;
 using P06Shop.Shared.Services.ShoeService;
 using P06Shop.Shared.Shop;
+using Swashbuckle.Examples;
 
 namespace P05Shop.API.Controllers 
 {
@@ -36,14 +37,20 @@ namespace P05Shop.API.Controllers
 
         [HttpPost("newShoe")]
         [HttpPost("addShoe")]
-        public IActionResult AddingShoe([FromBody] Shoe shoe)
+        [ProducesDefaultResponseType(typeof(ServiceResponse<Shoe>))]
+        [SwaggerRequestExample(typeof(Shoe), typeof(ShoeExample))]
+        public async Task<ActionResult<ServiceResponse<Shoe>>> AddingShoe([FromBody] Shoe shoe)
         {
             if (shoe.Name == null || shoe.Description == null || shoe.ShoeSize == null || shoe.Id.GetType() != typeof(int))
                 return BadRequest("Wrong shoe data");
 
-            var addShoeEndpoint = _configuration["ApiEndpoints:AddShoeEndpoint"];
-
-            return Created(addShoeEndpoint + "/5", shoe);
+            //var addShoeEndpoint = _configuration["ApiEndpoints:AddShoeEndpoint"];
+            var result = await _shoeService.CreateShoeAsync(shoe);
+            if (result.Success)
+                return Ok(result);
+            else
+                return StatusCode(500, $"Internal server error {result.Message}");
+            //return Created(addShoeEndpoint + "/", shoe);
         }
 
 

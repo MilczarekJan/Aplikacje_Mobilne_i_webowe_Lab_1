@@ -11,8 +11,8 @@ namespace P06Shop.Shared.Services.ShoeService
     {
         Task<ServiceResponse<Shoe>> GetShoeAsync(int id);
         Task<ServiceResponse<List<Shoe>>> GetShoesAsync();
-        Task<ServiceResponse<Shoe>> CreateProductAsync(Shoe shoe);
+        Task<ServiceResponse<Shoe>> CreateShoeAsync(Shoe shoe);
         Task<ServiceResponse<bool>> DeleteShoeAsync(int id);
-        Task<ServiceResponse<Shoe>> UpdateProductAsync(Shoe shoe);
+        Task<ServiceResponse<Shoe>> UpdateShoeAsync(Shoe shoe);
     }
 }

@@ -16,8 +16,7 @@ namespace P06Shop.Shared.Shop
 
         public string Name { get; set; }
         public Shoe() { }
-        public Shoe(int Id, double ShoeSize, string Description, string Name) {
-            this.Id = Id;
+        public Shoe(double ShoeSize, string Description, string Name) {
             this.ShoeSize = ShoeSize;
             this.Description = Description;
             this.Name = Name;
