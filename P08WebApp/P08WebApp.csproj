@@ -1,9 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\P05Shop.API\P05Shop.API.csproj" />
+    <ProjectReference Include="..\P05Shop.Client\P05Shop.Client.csproj" />
+    <ProjectReference Include="..\P06Shop.Shared\P06Shop.Shared.csproj" />
+    <ProjectReference Include="..\P07Shop.DataSeeder\P07Shop.DataSeeder.csproj" />
+  </ItemGroup>
 
 </Project>
