@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using P08WebApp;
 using Newtonsoft.Json.Linq;
+using P08WebApp.Models;
 
 public class MyApiService : IMyApiService
 {
@@ -16,6 +17,7 @@ public class MyApiService : IMyApiService
     private const string base_url = "http://localhost:5093";
     private const string shoeslist_endpoint = "api/Shoe/GetShoes";
     private const string shoe_endpoint = "api/Shoe/GetShoe/{0}";
+    private const string delete_endpoint = "api/Shoe/DeleteShoe/{0}";
 
     public MyApiService()
     {
@@ -66,13 +68,14 @@ public class MyApiService : IMyApiService
         }
     }
 
-    public async Task<Shoe> DeleteShoeAsync(int id)
+    public async Task<DeleteViewModel> DeleteShoeAsync(int id)
     {
-        var response = await _httpClient.DeleteAsync($"api/Shoe/DeleteShoe/{id}");
+        var uri = base_url + "/" + string.Format(delete_endpoint, id);
+        var response = await _httpClient.DeleteAsync(uri);
         response.EnsureSuccessStatusCode();
         var data = await response.Content.ReadAsStringAsync();
-        Shoe shoe = JsonConvert.DeserializeObject<Shoe>(data);
-        return shoe;
+        DeleteViewModel isDeleted = JsonConvert.DeserializeObject<DeleteViewModel>(data);
+        return isDeleted;
     }
 
     public async Task<Shoe> UpdateShoeAsync(int id, Shoe updatedShoe)

@@ -24,6 +24,10 @@ namespace P08WebApp
         public async Task<IActionResult> DisplayShoeInfo(int shoeId)
         {
             var shoe = await _shoeApiClient.GetShoeAsync(shoeId);
+            if (shoe == null)
+            {
+                return NotFound("No shoe found from this Id");
+            }
             var shoeViewModel = new ShoeViewModel
             {
                 Id = shoe.Id,
@@ -33,6 +37,19 @@ namespace P08WebApp
             };
 
             return View(shoeViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DisplayDeleteMessage(int shoeId) { 
+            var isDeleted = await _shoeApiClient.DeleteShoeAsync(shoeId);
+            if (isDeleted == null)
+            {
+                return NotFound("No shoe found by this Id");
+            }
+
+            if (isDeleted.success == true) {
+
+            }
+            return View(isDeleted);
         }
     }
 }

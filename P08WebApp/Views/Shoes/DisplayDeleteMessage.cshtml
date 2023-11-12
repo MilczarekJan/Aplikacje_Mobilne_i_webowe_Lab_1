@@ -1,0 +1,19 @@
+﻿@model DeleteViewModel
+
+@{
+    ViewData["Title"] = "Shoe Information";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model != null)
+{
+            <dl>
+                <dt>Success:</dt>
+                <dd>@Model.success.ToString()</dd>
+            </dl>
+}
+else
+{
+            <p>No information available for the specified shoe ID.</p>
+}

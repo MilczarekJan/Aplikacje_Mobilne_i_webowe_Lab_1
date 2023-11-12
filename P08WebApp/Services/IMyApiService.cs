@@ -1,4 +1,5 @@
 ﻿using P06Shop.Shared.Shop;
+using P08WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace P08WebApp
         Task<Shoe[]> GetShoesAsync();
         Task<Shoe> AddShoeAsync(Shoe shoe);
         Task<Shoe> GetShoeAsync(int id);
-        Task<Shoe> DeleteShoeAsync(int id);
+        Task<DeleteViewModel> DeleteShoeAsync(int id);
         Task<Shoe> UpdateShoeAsync(int id, Shoe updatedShoe);
     }
 }

@@ -13,3 +13,10 @@
     <input type="number" id="shoeId" name="shoeId" required />
     <button type="submit">Get Shoe Info</button>
 </form>
+
+
+<form asp-controller="Shoes" asp-action="DisplayDeleteMessage" method="post">
+    <label for="shoeId">Enter Shoe ID:</label>
+    <input type="number" id="shoeId" name="shoeId" required />
+    <button type="submit">Delete Shoe</button>
+</form>
