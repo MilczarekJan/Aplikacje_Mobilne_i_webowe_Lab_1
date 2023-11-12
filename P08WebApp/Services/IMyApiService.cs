@@ -11,9 +11,9 @@ namespace P08WebApp
     public interface IMyApiService
     {
         Task<Shoe[]> GetShoesAsync();
-        Task<Shoe> AddShoeAsync(Shoe shoe);
+        Task<Shoe> AddShoeAsync(AddShoeDto shoe);
         Task<Shoe> GetShoeAsync(int id);
         Task<DeleteViewModel> DeleteShoeAsync(int id);
-        Task<Shoe> UpdateShoeAsync(int id, Shoe updatedShoe);
+        Task<Shoe> UpdateShoeAsync(int id, AddShoeDto updatedShoe);
     }
 }

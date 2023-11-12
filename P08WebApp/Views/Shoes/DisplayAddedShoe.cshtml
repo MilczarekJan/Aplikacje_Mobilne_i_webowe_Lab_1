@@ -1,0 +1,28 @@
+﻿@model ShoeViewModel
+
+@{
+    ViewData["Title"] = "Shoe added";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model != null)
+{
+            <dl>
+                <dt>ID:</dt>
+                <dd>@Model.Id</dd>
+
+                <dt>Shoe Size:</dt>
+                <dd>@Model.ShoeSize</dd>
+
+                <dt>Description:</dt>
+                <dd>@Model.Description</dd>
+
+                <dt>Name:</dt>
+                <dd>@Model.Name</dd>
+            </dl>
+}
+else
+{
+            <p>No information available for the specified shoe ID.</p>
+}

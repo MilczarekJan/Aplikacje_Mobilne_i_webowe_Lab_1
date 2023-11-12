@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using P08WebApp.Models;
+using P06Shop.Shared.Shop;
 
 
 namespace P08WebApp
@@ -50,6 +51,70 @@ namespace P08WebApp
 
             }
             return View(isDeleted);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DisplayAddedShoe(string shoeName, double shoeSize, string shoeDescription)//ShoeViewModel model
+        {
+            /*
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            */
+
+            var shoe = new AddShoeDto
+            {
+                Name = shoeName,
+                ShoeSize = shoeSize,
+                Description = shoeDescription
+            };
+            var isAdded = await _shoeApiClient.AddShoeAsync(shoe);
+            if (isAdded == null)
+            {
+                return NotFound("Couldn't add the shoe");
+            }
+            var shoeViewModel = new ShoeViewModel
+            {
+                Id = isAdded.Id,
+                ShoeSize = isAdded.ShoeSize,
+                Description = isAdded.Description,
+                Name = isAdded.Name
+            };
+
+            return View(shoeViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DisplayUpdatedShoe(int shoeId, string shoeName, double shoeSize, string shoeDescription)//ShoeViewModel model
+        {
+            /*
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            */
+
+            var shoe = new AddShoeDto
+            {
+                Name = shoeName,
+                ShoeSize = shoeSize,
+                Description = shoeDescription
+            };
+            var isAdded = await _shoeApiClient.UpdateShoeAsync(shoeId, shoe);
+            if (isAdded == null)
+            {
+                return NotFound("Couldn't add the shoe");
+            }
+            var shoeViewModel = new ShoeViewModel
+            {
+                Id = isAdded.Id,
+                ShoeSize = isAdded.ShoeSize,
+                Description = isAdded.Description,
+                Name = isAdded.Name
+            };
+
+            return View(shoeViewModel);
         }
     }
 }
