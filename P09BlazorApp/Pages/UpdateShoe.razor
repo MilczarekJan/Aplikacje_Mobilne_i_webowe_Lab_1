@@ -46,7 +46,9 @@
 
 	public async Task UpdateShoeFromApi()
 	{
-		AddShoeDto updatedShoe = new AddShoeDto(42.5, shoeName, shoeDescription);
+		string newshoesize = shoeSize;
+		double shoeSizeAsDouble = double.Parse(newshoesize);
+		AddShoeDto updatedShoe = new AddShoeDto(shoeSizeAsDouble, shoeName, shoeDescription);
 		var uri = base_url + "/" + string.Format(update_endpoint, shoeId);
 		var response = await _httpClient.PutAsJsonAsync(uri, updatedShoe);
 		response.EnsureSuccessStatusCode();
