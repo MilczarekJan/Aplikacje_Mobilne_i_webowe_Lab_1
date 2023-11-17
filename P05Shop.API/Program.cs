@@ -30,6 +30,12 @@ builder.Services.AddSingleton<IConfiguration>(configuration);
 */
 
 var app = builder.Build();
+app.UseCors(builder =>
+{
+	builder.WithOrigins("http://localhost:5127") // Add the origin of your Blazor app
+		   .AllowAnyHeader()
+		   .AllowAnyMethod();
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

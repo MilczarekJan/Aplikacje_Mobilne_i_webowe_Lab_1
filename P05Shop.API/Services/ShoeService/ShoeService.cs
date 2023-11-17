@@ -56,7 +56,10 @@ namespace P05Shop.API.Services.ShoeService
             var shoeToGet = _dataContext.Shoes.FirstOrDefault(x => x.Id == id);
             try
             {
-                return new ServiceResponse<Shoe>() { Data = shoeToGet, Success = true };
+                if (shoeToGet != null) {
+					return new ServiceResponse<Shoe>() { Data = shoeToGet, Success = true };
+				}
+                else return new ServiceResponse<Shoe>() { Data = shoeToGet, Success = false };
             }
             catch {
                 return new ServiceResponse<Shoe>()
