@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P09BlazorApp", "P09BlazorAp
 		{B1822BF7-7C5A-4A6A-BB9C-0BBED0C8FDA3} = {B1822BF7-7C5A-4A6A-BB9C-0BBED0C8FDA3}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P10MAUI", "P10MAUI\P10MAUI.csproj", "{EED71E15-08DC-4F52-AADC-111641E94B3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,12 @@ Global
 		{503324A5-5CC1-454E-800B-70A1BCF9AFA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{503324A5-5CC1-454E-800B-70A1BCF9AFA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{503324A5-5CC1-454E-800B-70A1BCF9AFA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EED71E15-08DC-4F52-AADC-111641E94B3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EED71E15-08DC-4F52-AADC-111641E94B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EED71E15-08DC-4F52-AADC-111641E94B3B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EED71E15-08DC-4F52-AADC-111641E94B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EED71E15-08DC-4F52-AADC-111641E94B3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EED71E15-08DC-4F52-AADC-111641E94B3B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
