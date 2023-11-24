@@ -5,8 +5,8 @@
 <h3>Shoes</h3>
 <button class="btn btn-primary" @onclick="NavigateToGetShoe">Get Shoe</button>
 <button class="btn btn-primary" @onclick="NavigateToAddShoe">Add Shoe</button>
-<!--<button class="btn btn-primary" @onclick="NavigateToDeleteShoe">Delete Shoe</button>-->
-<!--<button class="btn btn-primary" @onclick="NavigateToUpdateShoe">Update Shoe</button>-->
+<button class="btn btn-primary" @onclick="NavigateToDeleteShoe">Delete Shoe</button>
+<button class="btn btn-primary" @onclick="NavigateToUpdateShoe">Update Shoe</button>
 
 @code {
     private void NavigateToGetShoe()
@@ -20,7 +20,7 @@
         // Redirect to the "/shoes/GetShoe" page
         NavigationManager.NavigateTo("/shoes/AddShoe");
     }
-    /*
+
     private void NavigateToDeleteShoe()
     {
         // Redirect to the "/shoes/GetShoe" page
@@ -32,5 +32,6 @@
         // Redirect to the "/shoes/GetShoe" page
         NavigationManager.NavigateTo("/shoes/UpdateShoe");
     }
+    /*
     */
 }

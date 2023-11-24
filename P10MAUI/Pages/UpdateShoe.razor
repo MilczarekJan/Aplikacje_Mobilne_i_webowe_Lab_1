@@ -1,20 +1,31 @@
-﻿@page "/shoes/AddShoe"
+﻿@page "/shoes/UpdateShoe"
 @using P10MAUI.Data
-@inject AddShoeService addShoeService
-<h3>AddShoe</h3>
+@inject UpdateShoeService updateShoeService
+<h3>Update Shoe</h3>
 
+<SfTextBox Placeholder='Id' Value="@shoeId" @oninput="UpdateShoeId"></SfTextBox>
 <SfTextBox Placeholder='Name' Value="@shoeName" @oninput="UpdateShoeName"></SfTextBox>
 <SfTextBox Placeholder='Description' Value="@shoeDescription" @oninput="UpdateShoeDescription"></SfTextBox>
 <SfTextBox Placeholder='ShoeSize' Value="@shoeSize" @oninput="UpdateShoeSize"></SfTextBox>
-<button class="btn btn-primary" @onclick="DisplayShoeAddSuccess">Add Shoe</button>
+<button class="btn btn-primary" @onclick="showUpdateStatus">Update Shoe</button>
 <p>Shoe status: @shoeNameToDisplay</p>
 
 @code {
 	//IMyApiService _shoeApiClient = new MyApiService();
+	private readonly HttpClient _httpClient = new HttpClient();
+	private const string base_url = "http://localhost:5093";
+	private const string update_endpoint = "api/Shoe/UpdateShoe/{0}";
+
 	private string shoeNameToDisplay = "";
 	public string shoeName { get; set; } = "";
 	public string shoeDescription { get; set; } = "";
 	public string shoeSize { get; set; } = "";
+	public string shoeId { get; set; } = "";
+
+	private void UpdateShoeId(ChangeEventArgs args)
+	{
+		shoeId = args.Value.ToString();
+	}
 
 	private void UpdateShoeName(ChangeEventArgs args)
 	{
@@ -31,8 +42,8 @@
 		shoeSize = args.Value.ToString();
 	}
 
-	public async Task DisplayShoeAddSuccess()
+	public async Task showUpdateStatus()
 	{
-		shoeNameToDisplay = await addShoeService.AddShoeFromApi(shoeSize, shoeName, shoeDescription);
+		shoeNameToDisplay = await updateShoeService.UpdateShoeFromApi(shoeId, shoeName, shoeDescription, shoeSize);
 	}
 }

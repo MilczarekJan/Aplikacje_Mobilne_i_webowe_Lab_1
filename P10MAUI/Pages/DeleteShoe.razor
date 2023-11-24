@@ -1,0 +1,27 @@
+﻿@page "/shoes/DeleteShoe"
+@using P10MAUI.Data
+@inject DeleteShoeService deleteShoeService
+
+<h3>Delete Shoe</h3>
+<SfTextBox Placeholder='Id' Value="@shoeId" @oninput="UpdateShoeId"></SfTextBox>
+<button class="btn btn-primary" @onclick="GetDeleteMessage">Delete Shoe</button>
+<p>Shoe status: @shoeNameToDisplay</p>
+
+@code {
+	//IMyApiService _shoeApiClient = new MyApiService();
+	private readonly HttpClient _httpClient = new HttpClient();
+	private const string base_url = "http://localhost:5093";
+	private const string delete_endpoint = "api/Shoe/DeleteShoe/{0}";
+
+	private string shoeNameToDisplay = "";
+	public string shoeId { get; set; } = "";
+
+	private void UpdateShoeId(ChangeEventArgs args)
+	{
+		shoeId = args.Value.ToString();
+	}
+	public async Task GetDeleteMessage()
+	{
+		shoeNameToDisplay = await deleteShoeService.DeleteShoeFromApi(shoeId);
+	}
+}
