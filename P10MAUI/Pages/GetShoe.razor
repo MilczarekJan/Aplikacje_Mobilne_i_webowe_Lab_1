@@ -1,23 +1,18 @@
 ﻿@page "/shoes/GetShoe"
+@using System.Net.Http
+@using P10MAUI.Data
+@inject GetShoeService getShoeService
 
 <h3>Get Shoe</h3>
-
 <SfTextBox Placeholder='Id' Value="@shoeId" @oninput="UpdateShoeId"></SfTextBox>
 <p>Shoe name: @shoeNameToDisplay</p>
 <p>Shoe description: @shoeDescToDisplay</p>
 <p>Shoe size: @shoeSizeToDisplay</p>
-<button class="btn btn-primary" @onclick="GetShoeFromApi">Get Shoe</button>
+<button class="btn btn-primary" @onclick="DisplayGotShoe">Get Shoe</button>
+
 @code {
-
-	//IMyApiService _shoeApiClient = new MyApiService();
-	private readonly HttpClient _httpClient = new HttpClient();
 	private const string base_url = "http://localhost:5093";
-	private const string shoeslist_endpoint = "api/Shoe/GetShoes";
 	private const string shoe_endpoint = "api/Shoe/GetShoe/{0}";
-	private const string delete_endpoint = "api/Shoe/DeleteShoe/{0}";
-	private const string add_endpoint = "api/Shoe/newShoe";
-	private const string update_endpoint = "api/Shoe/UpdateShoe/{0}";
-
 	private string shoeNameToDisplay = "";
 	private string shoeDescToDisplay = "";
 	private string shoeSizeToDisplay = "";
@@ -27,7 +22,23 @@
 	{
 		shoeId = args.Value.ToString();
 	}
-
+	public async Task DisplayGotShoe()
+	{
+		var shoeToDisplay = await getShoeService.GetShoeFromApi(shoeId);
+		if (shoeToDisplay != null) //&& responseObj.Value<string>("data") != null
+		{
+			shoeNameToDisplay = shoeToDisplay.Name;
+			shoeDescToDisplay = shoeToDisplay.Description;
+			shoeSizeToDisplay = shoeToDisplay.ShoeSize.ToString();
+		}
+		else
+		{
+			shoeNameToDisplay = "No shoe found";
+			shoeDescToDisplay = "No shoe found";
+			shoeSizeToDisplay = "No shoe found";
+		}
+	}
+	/*
 	public async Task GetShoeFromApi()
 	{
 		var uri = base_url + "/" + string.Format(shoe_endpoint, shoeId);
@@ -49,4 +60,5 @@
 			shoeSizeToDisplay = "No shoe found";
 		}
 	}
+	*/
 }

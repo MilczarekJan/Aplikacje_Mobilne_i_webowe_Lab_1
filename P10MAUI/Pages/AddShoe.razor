@@ -1,0 +1,62 @@
+﻿@page "/shoes/AddShoe"
+<h3>AddShoe</h3>
+
+<SfTextBox Placeholder='Name' Value="@shoeName" @oninput="UpdateShoeName"></SfTextBox>
+<SfTextBox Placeholder='Description' Value="@shoeDescription" @oninput="UpdateShoeDescription"></SfTextBox>
+<SfTextBox Placeholder='ShoeSize' Value="@shoeSize" @oninput="UpdateShoeSize"></SfTextBox>
+<button class="btn btn-primary" @onclick="AddShoeFromApi">Add Shoe</button>
+<p>Shoe status: @shoeNameToDisplay</p>
+
+@code {
+	//IMyApiService _shoeApiClient = new MyApiService();
+	private readonly HttpClient _httpClient = new HttpClient();
+	private const string base_url = "http://localhost:5093";
+	private const string shoeslist_endpoint = "api/Shoe/GetShoes";
+	private const string shoe_endpoint = "api/Shoe/GetShoe/{0}";
+	private const string delete_endpoint = "api/Shoe/DeleteShoe/{0}";
+	private const string add_endpoint = "api/Shoe/newShoe";
+	private const string update_endpoint = "api/Shoe/UpdateShoe/{0}";
+
+	private string shoeNameToDisplay = "";
+	public string shoeName { get; set; } = "";
+	public string shoeDescription { get; set; } = "";
+	public string shoeSize { get; set; } = "";
+
+	private void UpdateShoeName(ChangeEventArgs args)
+	{
+		shoeName = args.Value.ToString();
+	}
+
+	private void UpdateShoeDescription(ChangeEventArgs args)
+	{
+		shoeDescription = args.Value.ToString();
+	}
+
+	private void UpdateShoeSize(ChangeEventArgs args)
+	{
+		shoeSize = args.Value.ToString();
+	}
+
+	public async Task AddShoeFromApi()
+	{
+		string newshoesize = shoeSize;
+		double shoeSizeAsDouble = double.Parse(newshoesize);
+		AddShoeDto shoeToAdd = new AddShoeDto(shoeSizeAsDouble, shoeName, shoeDescription);
+		var uri = base_url + "/" + add_endpoint;
+		var response = await _httpClient.PostAsJsonAsync(uri, shoeToAdd);
+		response.EnsureSuccessStatusCode();
+		var jsonResponse = await response.Content.ReadAsStringAsync();
+
+		var responseObj = JsonConvert.DeserializeObject<JObject>(jsonResponse);
+		bool success = responseObj.Value<bool>("success");
+		if (success) //&& responseObj.Value<string>("data") != null
+		{
+			var shoeData = responseObj["data"].ToObject<Shoe>();
+			shoeNameToDisplay = "Sukces";
+		}
+		else
+		{
+			shoeNameToDisplay = "Blad";
+		}
+	}
+}

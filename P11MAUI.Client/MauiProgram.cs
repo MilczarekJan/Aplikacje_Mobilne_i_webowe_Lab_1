@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using P10MAUI.Models;
-using P10MAUI.Data;
-using Syncfusion.Blazor;
 
-namespace P10MAUI
+namespace P11MAUI.Client
 {
 	public static class MauiProgram
 	{
@@ -15,18 +12,13 @@ namespace P10MAUI
 				.ConfigureFonts(fonts =>
 				{
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				});
 
-			builder.Services.AddMauiBlazorWebView();
-
 #if DEBUG
-		builder.Services.AddBlazorWebViewDeveloperTools();
 		builder.Logging.AddDebug();
 #endif
-			builder.Services.AddScoped<HttpClient>();
-			builder.Services.AddSingleton<WeatherForecastService>();
-			builder.Services.AddTransient<GetShoeService>();
-			builder.Services.AddSyncfusionBlazor();
+
 			return builder.Build();
 		}
 	}
