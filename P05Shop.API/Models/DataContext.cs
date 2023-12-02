@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using P06Shop.Shared.Auth;
 using P06Shop.Shared.Shop;
 using P07Shop.DataSeeder;
 using System.Collections.Generic;
@@ -13,8 +14,9 @@ namespace P05Shop.API.Models
         {
         }
         public DbSet<Shoe> Shoes { get; set; }
+		public DbSet<User> Users { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // fluent api 
             modelBuilder.Entity<Shoe>().HasKey(p => p.Id);

@@ -12,8 +12,7 @@ namespace P06Shop.Shared
 
         public bool Success { get; set; }
 
-        public string Message { get; set; }
-    
-
+        public string Message { get; set; } = "Cannot invoke operation";
+     
     }
 }
