@@ -54,7 +54,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("MyCorsePolicy", builder =>
-	builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+	builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5127")); //.WithOrigins("http://localhost:5127")
 });
 
 //builder.Services.AddCors(options =>

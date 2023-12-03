@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using P06Shop.Shared;
 using P06Shop.Shared.Services.ProductService;
@@ -10,6 +11,7 @@ namespace P05Shop.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class ShoeController : Controller
     {
         private readonly IShoeService _shoeService; //shoeservice, bêdzie o odpowiedziach dotycz¹cych butów
@@ -54,7 +56,7 @@ namespace P05Shop.API.Controllers
         }
 
 
-        [HttpGet("GetShoe/{id}")]
+        [HttpGet("GetShoe/{id}"), Authorize]
         public async Task<ActionResult<ServiceResponse<Shoe>>> GetShoe([FromRoute] int id)
         {
 
