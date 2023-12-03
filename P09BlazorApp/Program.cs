@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using P06Shop.Shared.Configuration;
+using P06Shop.Shared.Services.ShoeServices;
 using P06Shop.Shared.Services.AuthService;
 using P09BlazorApp;
 using P09BlazorApp.Services.CustomAuthStateProvider;
@@ -28,6 +29,7 @@ builder.Services.AddBlazoredLocalStorage();
 // autorization
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AppSettings>();
+builder.Services.AddScoped<GetShoesService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddHttpClient<IAuthService, AuthService>(client => client.BaseAddress = uriBuilder.Uri); //uriBuilder.Uri
 //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });

@@ -25,8 +25,8 @@ namespace P05Shop.API.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<Shoe>>>> GetShoes()
+        [HttpGet, Authorize]//, Authorize
+		public async Task<ActionResult<ServiceResponse<List<Shoe>>>> GetShoes()
         {
 
             var result = await _shoeService.GetShoesAsync();
@@ -56,7 +56,7 @@ namespace P05Shop.API.Controllers
         }
 
 
-        [HttpGet("GetShoe/{id}"), Authorize]
+        [HttpGet("GetShoe/{id}")]
         public async Task<ActionResult<ServiceResponse<Shoe>>> GetShoe([FromRoute] int id)
         {
 

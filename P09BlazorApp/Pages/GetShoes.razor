@@ -1,0 +1,50 @@
+﻿@page "/shoes/GetShoes"
+@inject ILocalStorageService LocalStorageService
+@inject P06Shop.Shared.Services.ShoeServices.GetShoesService getShoesService
+
+<h3>Get Shoes</h3>
+<button class="btn btn-primary" @onclick="GetShoesFromApi">Get Shoes</button>
+
+@if (shoesList != null && shoesList.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Shoe Size</th>
+                <th>Description</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var shoe in shoesList)
+            {
+                <tr>
+                    <td>@shoe.Id</td>
+                    <td>@shoe.ShoeSize</td>
+                    <td>@shoe.Description</td>
+                    <td>@shoe.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No shoes available.</p>
+}
+
+@code {
+    //IMyApiService _shoeApiClient = new MyApiService();
+    private readonly HttpClient _httpClient = new HttpClient();
+    private const string base_url = "http://localhost:5093";
+    private const string shoeslist_endpoint = "api/Shoe/GetShoes";
+    private List<Shoe> shoesList;
+
+	public async Task GetShoesFromApi()
+	{
+		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
+		token = token.Replace("\"", "");
+		shoesList = await getShoesService.GetShoesFromApi(token);
+	}
+}
