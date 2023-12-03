@@ -73,6 +73,7 @@ namespace P05Shop.API.Controllers
         }
 
         [HttpDelete("DeleteShoe/{id}")]
+        [Authorize]
         public async Task<ActionResult<ServiceResponse<Shoe>>> DeleteShoe(int id)
         {
             if (id == null)
@@ -85,6 +86,7 @@ namespace P05Shop.API.Controllers
         }
 
         [HttpPut("UpdateShoe/{id}")]
+        [Authorize]
         public async Task<ActionResult<ServiceResponse<Shoe>>> UpdateShoe(int id, [FromBody] Shoe updatedShoe)
         {
             if (id == null)

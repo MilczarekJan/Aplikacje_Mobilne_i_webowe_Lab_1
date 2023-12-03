@@ -1,4 +1,6 @@
 ﻿@page "/shoes/UpdateShoe"
+@inject ILocalStorageService LocalStorageService
+@inject P06Shop.Shared.Services.ShoeServices.UpdateShoeService updateShoesService
 <h3>Update Shoe</h3>
 
 <SfTextBox Placeholder='Id' Value="@shoeId" @oninput="UpdateShoeId"></SfTextBox>
@@ -46,24 +48,8 @@
 
 	public async Task UpdateShoeFromApi()
 	{
-		string newshoesize = shoeSize;
-		double shoeSizeAsDouble = double.Parse(newshoesize);
-		AddShoeDto updatedShoe = new AddShoeDto(shoeSizeAsDouble, shoeName, shoeDescription);
-		var uri = base_url + "/" + string.Format(update_endpoint, shoeId);
-		var response = await _httpClient.PutAsJsonAsync(uri, updatedShoe);
-		response.EnsureSuccessStatusCode();
-		var jsonResponse = await response.Content.ReadAsStringAsync();
-
-		var responseObj = JsonConvert.DeserializeObject<JObject>(jsonResponse);
-		bool success = responseObj.Value<bool>("success");
-		if (success) //&& responseObj.Value<string>("data") != null
-		{
-			var shoeData = responseObj["data"].ToObject<Shoe>();
-			shoeNameToDisplay = "Sukces";
-		}
-		else
-		{
-			shoeNameToDisplay = "Blad";
-		}
+		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
+		token = token.Replace("\"", "");
+		shoeNameToDisplay = await updateShoesService.UpdateShoeFromApi(shoeId, shoeName, shoeDescription, shoeSize, token);
 	}
 }

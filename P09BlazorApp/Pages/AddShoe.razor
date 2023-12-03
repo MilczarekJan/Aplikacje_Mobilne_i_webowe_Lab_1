@@ -10,11 +10,6 @@
 <p>Shoe status: @shoeNameToDisplay</p>
 
 @code {
-	//IMyApiService _shoeApiClient = new MyApiService();
-	private readonly HttpClient _httpClient = new HttpClient();
-	private const string base_url = "http://localhost:5093";
-	private const string add_endpoint = "api/Shoe/newShoe";
-
 	private string shoeNameToDisplay = "";
 	public string shoeName { get; set; } = "";
 	public string shoeDescription { get; set; } = "";

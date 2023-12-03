@@ -1,4 +1,6 @@
 ﻿@page "/shoes/DeleteShoe"
+@inject ILocalStorageService LocalStorageService
+@inject P06Shop.Shared.Services.ShoeServices.DeleteShoeService deleteShoesService
 
 <h3>Delete Shoe</h3>
 <SfTextBox Placeholder='Id' Value="@shoeId" @oninput="UpdateShoeId"></SfTextBox>
@@ -6,15 +8,6 @@
 <p>Shoe status: @shoeNameToDisplay</p>
 
 @code {
-	//IMyApiService _shoeApiClient = new MyApiService();
-	private readonly HttpClient _httpClient = new HttpClient();
-	private const string base_url = "http://localhost:5093";
-	private const string shoeslist_endpoint = "api/Shoe/GetShoes";
-	private const string shoe_endpoint = "api/Shoe/GetShoe/{0}";
-	private const string delete_endpoint = "api/Shoe/DeleteShoe/{0}";
-	private const string add_endpoint = "api/Shoe/newShoe";
-	private const string update_endpoint = "api/Shoe/UpdateShoe/{0}";
-
 	private string shoeNameToDisplay = "";
 	public string shoeId { get; set; } = "";
 
@@ -25,18 +18,8 @@
 
 	public async Task DeleteShoeFromApi()
 	{
-		var uri = base_url + "/" + string.Format(delete_endpoint, shoeId);
-		var response = await _httpClient.DeleteAsync(uri); //"http://localhost:5093/api/Shoe/GetShoe/1"
-		var jsonResponse = await response.Content.ReadAsStringAsync();
-		var responseObj = JsonConvert.DeserializeObject<JObject>(jsonResponse);
-		bool success = responseObj.Value<bool>("success");
-		if (success) //&& responseObj.Value<string>("data") != null
-		{
-			shoeNameToDisplay = "Pomyslnie usunieto";
-		}
-		else
-		{
-			shoeNameToDisplay = "Nie udalo sie usunac";
-		}
+		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
+		token = token.Replace("\"", "");
+		shoeNameToDisplay = await deleteShoesService.DeleteShoeFromApi(shoeId, token);
 	}
 }
