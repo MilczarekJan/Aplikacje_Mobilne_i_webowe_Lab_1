@@ -1,4 +1,4 @@
-﻿namespace P09BlazorApp.Models
+﻿namespace P06Shop.Shared.Shop
 {
 	public class AddShoeDto
 	{

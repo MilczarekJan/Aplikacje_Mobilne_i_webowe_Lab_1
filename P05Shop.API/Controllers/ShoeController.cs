@@ -41,6 +41,7 @@ namespace P05Shop.API.Controllers
         [HttpPost("addShoe")]
         [ProducesDefaultResponseType(typeof(ServiceResponse<Shoe>))]
         [SwaggerRequestExample(typeof(Shoe), typeof(ShoeExample))]
+        [Authorize]
         public async Task<ActionResult<ServiceResponse<Shoe>>> AddingShoe([FromBody] Shoe shoe)
         {
             if (shoe.Name == null || shoe.Description == null || shoe.ShoeSize == null || shoe.Id.GetType() != typeof(int))
