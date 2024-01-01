@@ -24,7 +24,7 @@ namespace P10MAUI
 		builder.Logging.AddDebug();
 #endif
 			builder.Services.AddScoped<HttpClient>();
-			builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddSingleton<WeatherForecastService>();
 			builder.Services.AddTransient<GetShoeService>();
 			builder.Services.AddTransient<AddShoeService>();
 			builder.Services.AddTransient<DeleteShoeService>();

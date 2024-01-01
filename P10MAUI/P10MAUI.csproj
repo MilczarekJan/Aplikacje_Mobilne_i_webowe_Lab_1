@@ -50,9 +50,15 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.14" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Syncfusion.Blazor" Version="23.2.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\P06Shop.Shared\P06Shop.Shared.csproj" />
     </ItemGroup>
 
 </Project>
