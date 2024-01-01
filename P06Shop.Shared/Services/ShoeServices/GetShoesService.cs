@@ -6,7 +6,7 @@ namespace P06Shop.Shared.Services.ShoeServices
 {
     public class GetShoesService
     {
-		private const string base_url = "http://localhost:5093"; //"http://localhost:5093";
+		private const string base_url = "https://shoeapi.azurewebsites.net"; //"http://localhost:5093";
 		private const string shoeslist_endpoint = "api/Shoe";
 		private readonly HttpClient _httpClient;
 

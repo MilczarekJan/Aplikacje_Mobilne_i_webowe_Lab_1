@@ -6,7 +6,7 @@ namespace P10MAUI.Data
 {
     public class GetShoeService
     {
-		private const string base_url = "http://localhost:5093"; //"http://localhost:5093";
+		private const string base_url = "https://p05shopapiwindows.azurewebsites.net"; //"http://localhost:5093";
 		private const string shoe_endpoint = "api/Shoe/GetShoe/{0}";
 		private readonly HttpClient _httpClient;
 

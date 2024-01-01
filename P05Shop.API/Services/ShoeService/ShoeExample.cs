@@ -1,3 +1,4 @@
+/*
 using P06Shop.Shared.Shop;
 using Swashbuckle.Examples;
 
@@ -13,3 +14,4 @@ public class ShoeExample : IExamplesProvider
         };
     }
 }
+*/

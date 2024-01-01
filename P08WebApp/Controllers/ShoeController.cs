@@ -63,12 +63,7 @@ namespace P08WebApp
             }
             */
 
-            var shoe = new AddShoeDto
-            {
-                Name = shoeName,
-                ShoeSize = shoeSize,
-                Description = shoeDescription
-            };
+            var shoe = new AddShoeDto(shoeSize, shoeDescription, shoeName);
             var isAdded = await _shoeApiClient.AddShoeAsync(shoe);
             if (isAdded == null)
             {
@@ -95,12 +90,7 @@ namespace P08WebApp
             }
             */
 
-            var shoe = new AddShoeDto
-            {
-                Name = shoeName,
-                ShoeSize = shoeSize,
-                Description = shoeDescription
-            };
+            var shoe = new AddShoeDto(shoeSize, shoeDescription, shoeName);
             var isAdded = await _shoeApiClient.UpdateShoeAsync(shoeId, shoe);
             if (isAdded == null)
             {

@@ -37,7 +37,7 @@ else
 @code {
     //IMyApiService _shoeApiClient = new MyApiService();
     private readonly HttpClient _httpClient = new HttpClient();
-    private const string base_url = "http://localhost:5093";
+    private const string base_url = "https://shoeapi.azurewebsites.net"; //https://shoeapi.azurewebsites.net/ http://localhost:5093
     private const string shoeslist_endpoint = "api/Shoe/GetShoes";
     private List<Shoe> shoesList;
 

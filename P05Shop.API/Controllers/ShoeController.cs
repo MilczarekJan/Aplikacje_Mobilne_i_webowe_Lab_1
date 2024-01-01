@@ -5,7 +5,6 @@ using P06Shop.Shared;
 using P06Shop.Shared.Services.ProductService;
 using P06Shop.Shared.Services.ShoeService;
 using P06Shop.Shared.Shop;
-using Swashbuckle.Examples;
 
 namespace P05Shop.API.Controllers 
 {
@@ -40,7 +39,6 @@ namespace P05Shop.API.Controllers
         [HttpPost("newShoe")]
         [HttpPost("addShoe")]
         [ProducesDefaultResponseType(typeof(ServiceResponse<Shoe>))]
-        [SwaggerRequestExample(typeof(Shoe), typeof(ShoeExample))]
         [Authorize]
         public async Task<ActionResult<ServiceResponse<Shoe>>> AddingShoe([FromBody] Shoe shoe)
         {
