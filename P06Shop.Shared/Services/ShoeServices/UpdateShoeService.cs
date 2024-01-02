@@ -8,7 +8,7 @@ namespace P06Shop.Shared.Services.ShoeServices
     public class UpdateShoeService
     {
         private readonly HttpClient _httpClient;
-        private const string base_url = "http://localhost:5093";
+        private const string base_url = "https://p05shopapiwindows.azurewebsites.net";
         private const string update_endpoint = "api/Shoe/UpdateShoe/{0}";
 
         public UpdateShoeService() { 

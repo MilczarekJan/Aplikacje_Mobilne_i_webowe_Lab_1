@@ -1,6 +1,7 @@
 ﻿@page "/shoes/GetShoe"
 @using System.Net.Http
-@using P10MAUI.Data
+@using P06Shop.Shared.Services.ShoeServices;
+@inject ILocalStorageService LocalStorageService
 @inject GetShoeService getShoeService
 
 <h3>Get Shoe</h3>
@@ -11,8 +12,6 @@
 <button class="btn btn-primary" @onclick="DisplayGotShoe">Get Shoe</button>
 
 @code {
-	private const string base_url = "http://localhost:5093";
-	private const string shoe_endpoint = "api/Shoe/GetShoe/{0}";
 	private string shoeNameToDisplay = "";
 	private string shoeDescToDisplay = "";
 	private string shoeSizeToDisplay = "";

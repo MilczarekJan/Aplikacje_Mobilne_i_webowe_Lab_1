@@ -40,7 +40,7 @@ namespace P10MAUI
             builder.Services.AddScoped<AppSettings>();
             builder.Services.AddScoped<HttpClient>();
             builder.Services.AddSingleton<WeatherForecastService>();
-			builder.Services.AddTransient<GetShoeService>();
+			builder.Services.AddTransient<GetShoesService>();
 			builder.Services.AddTransient<AddShoeService>();
 			builder.Services.AddTransient<DeleteShoeService>();
 			builder.Services.AddTransient<UpdateShoeService>();

@@ -1,5 +1,6 @@
 ﻿@page "/shoes/UpdateShoe"
-@using P10MAUI.Data
+@using P06Shop.Shared.Services.ShoeServices;
+@inject ILocalStorageService LocalStorageService
 @inject UpdateShoeService updateShoeService
 <h3>Update Shoe</h3>
 
@@ -13,8 +14,6 @@
 @code {
 	//IMyApiService _shoeApiClient = new MyApiService();
 	private readonly HttpClient _httpClient = new HttpClient();
-	private const string base_url = "http://localhost:5093";
-	private const string update_endpoint = "api/Shoe/UpdateShoe/{0}";
 
 	private string shoeNameToDisplay = "";
 	public string shoeName { get; set; } = "";
@@ -44,6 +43,8 @@
 
 	public async Task showUpdateStatus()
 	{
-		shoeNameToDisplay = await updateShoeService.UpdateShoeFromApi(shoeId, shoeName, shoeDescription, shoeSize);
+		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
+		token = token.Replace("\"", "");
+		shoeNameToDisplay = await updateShoeService.UpdateShoeFromApi(shoeId, shoeName, shoeDescription, shoeSize, token);
 	}
 }

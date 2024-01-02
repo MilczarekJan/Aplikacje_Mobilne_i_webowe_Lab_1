@@ -1,6 +1,7 @@
 ﻿@page "/shoes/AddShoe"
-@using P10MAUI.Data
-@inject AddShoeService addShoeService
+@using P06Shop.Shared.Services.ShoeServices;
+@inject ILocalStorageService LocalStorageService
+@inject AddShoeService addShoeService;
 <h3>AddShoe</h3>
 
 <SfTextBox Placeholder='Name' Value="@shoeName" @oninput="UpdateShoeName"></SfTextBox>
@@ -33,6 +34,8 @@
 
 	public async Task DisplayShoeAddSuccess()
 	{
-		shoeNameToDisplay = await addShoeService.AddShoeFromApi(shoeSize, shoeName, shoeDescription);
+		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
+		token = token.Replace("\"", "");
+		shoeNameToDisplay = await addShoeService.AddShoeFromApi(shoeSize, shoeName, shoeDescription, token);
 	}
 }

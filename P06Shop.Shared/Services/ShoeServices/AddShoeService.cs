@@ -7,8 +7,8 @@ namespace P06Shop.Shared.Services.ShoeServices
 {
 	public class AddShoeService
 	{
-		private const string base_url = "http://localhost:5093";
-		private const string add_endpoint = "api/Shoe/newShoe";
+		private const string base_url = "https://p05shopapiwindows.azurewebsites.net"; //http://localhost:5093
+        private const string add_endpoint = "api/Shoe/newShoe";
 		private readonly HttpClient _httpClient;
 
 		public AddShoeService()

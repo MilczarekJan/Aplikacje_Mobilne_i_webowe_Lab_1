@@ -1,5 +1,6 @@
 ﻿@page "/shoes/DeleteShoe"
-@using P10MAUI.Data
+@using P06Shop.Shared.Services.ShoeServices;
+@inject ILocalStorageService LocalStorageService
 @inject DeleteShoeService deleteShoeService
 
 <h3>Delete Shoe</h3>
@@ -8,11 +9,6 @@
 <p>Shoe status: @shoeNameToDisplay</p>
 
 @code {
-	//IMyApiService _shoeApiClient = new MyApiService();
-	private readonly HttpClient _httpClient = new HttpClient();
-	private const string base_url = "http://localhost:5093";
-	private const string delete_endpoint = "api/Shoe/DeleteShoe/{0}";
-
 	private string shoeNameToDisplay = "";
 	public string shoeId { get; set; } = "";
 
@@ -22,6 +18,8 @@
 	}
 	public async Task GetDeleteMessage()
 	{
-		shoeNameToDisplay = await deleteShoeService.DeleteShoeFromApi(shoeId);
+		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
+		token = token.Replace("\"", "");
+		shoeNameToDisplay = await deleteShoeService.DeleteShoeFromApi(shoeId, token);
 	}
 }

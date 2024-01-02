@@ -6,7 +6,7 @@ namespace P06Shop.Shared.Services.ShoeServices
 {
 	public class DeleteShoeService
 	{
-		private const string base_url = "http://localhost:5093";
+		private const string base_url = "https://p05shopapiwindows.azurewebsites.net";
 		private const string delete_endpoint = "api/Shoe/DeleteShoe/{0}";
 		private readonly HttpClient _httpClient;
 		public DeleteShoeService()
