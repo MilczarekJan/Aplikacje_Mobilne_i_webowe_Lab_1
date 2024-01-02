@@ -24,7 +24,7 @@ namespace P06Shop.Shared.Services.AuthService
 
         public async Task<ServiceResponse<string>> Login(UserLoginDTO userLoginDto)
         {
-            var result = await _httpClient.PostAsJsonAsync("api/auth/login/", userLoginDto);
+            var result = await _httpClient.PostAsJsonAsync("https://p05shopapiwindows.azurewebsites.net/api/auth/login/", userLoginDto);
 
             var data =  await result.Content.ReadFromJsonAsync<ServiceResponse<string>>();
 
@@ -33,13 +33,13 @@ namespace P06Shop.Shared.Services.AuthService
 
         public async Task<ServiceResponse<int>> Register(UserRegisterDTO userRegisterDTO)
         {
-            var result = await _httpClient.PostAsJsonAsync("api/auth/register/", userRegisterDTO);
+            var result = await _httpClient.PostAsJsonAsync("https://p05shopapiwindows.azurewebsites.net/api/auth/register/", userRegisterDTO);
             return await result.Content.ReadFromJsonAsync<ServiceResponse<int>>();
         }
 
         public async Task<ServiceResponse<bool>> ChangePassword(string newPassword)
         {
-            var result = await _httpClient.PostAsJsonAsync("api/auth/change-password/", newPassword);
+            var result = await _httpClient.PostAsJsonAsync("https://p05shopapiwindows.azurewebsites.net/api/auth/change-password/", newPassword);
 
             return await result.Content.ReadFromJsonAsync<ServiceResponse<bool>>();
         }

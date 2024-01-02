@@ -4,27 +4,26 @@ using P06Shop.Shared.Shop;
 
 namespace P06Shop.Shared.Services.ShoeServices
 {
-    public class GetShoesService
+    public class GetShoeService
     {
-		private const string base_url = "http://localhost:5093"; //"http://localhost:5093";
-		private const string shoeslist_endpoint = "api/Shoe";
+		private const string base_url = "https://p05shopapiwindows.azurewebsites.net"; //"http://localhost:5093";
+		private const string shoe_endpoint = "api/Shoe/GetShoe/{0}";
 		private readonly HttpClient _httpClient;
 
-		public GetShoesService() { 
+		public GetShoeService() { 
 			_httpClient = new HttpClient();
 		}
 
-		public async Task<List<Shoe>> GetShoesFromApi(string token)
+		public async Task<Shoe> GetShoeFromApi(string shoeId)
 		{
-			var uri = base_url + "/" + shoeslist_endpoint;
-			_httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
+			var uri = base_url + "/" + string.Format(shoe_endpoint, shoeId);
 			var response = await _httpClient.GetAsync(uri); //"http://localhost:5093/api/Shoe/GetShoe/1"
 			var jsonResponse = await response.Content.ReadAsStringAsync();
 			var responseObj = JsonConvert.DeserializeObject<JObject>(jsonResponse);
 			bool success = responseObj.Value<bool>("success");
 			if (success) //&& responseObj.Value<string>("data") != null
 			{
-				var shoeData = responseObj["data"].ToObject<List<Shoe>>();
+				var shoeData = responseObj["data"].ToObject<Shoe>();
 				return shoeData;
 			}
 			else
