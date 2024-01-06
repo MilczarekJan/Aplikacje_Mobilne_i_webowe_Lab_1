@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using P06Shop.Shared.Shop;
+using System.Net.Http;
 
 namespace P06Shop.Shared.Services.ShoeServices
 {
@@ -17,7 +18,9 @@ namespace P06Shop.Shared.Services.ShoeServices
 		public async Task<List<Shoe>> GetShoesFromApi(string token)
 		{
 			var uri = base_url + "/" + shoeslist_endpoint;
-			_httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
+			if (!_httpClient.DefaultRequestHeaders.Contains("Authorization")) {
+                _httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
+            }
 			var response = await _httpClient.GetAsync(uri); //"http://localhost:5093/api/Shoe/GetShoe/1"
 			var jsonResponse = await response.Content.ReadAsStringAsync();
 			var responseObj = JsonConvert.DeserializeObject<JObject>(jsonResponse);
