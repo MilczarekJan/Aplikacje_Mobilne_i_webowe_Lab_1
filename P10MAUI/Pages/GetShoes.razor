@@ -4,7 +4,10 @@
 
 <h3>Get Shoes</h3>
 <button class="btn btn-primary" @onclick="GetShoesFromApi">Get Shoes</button>
-
+@if (isLoading)
+{
+    <img src="/loading.gif" alt="Loading..." style="width: 20vw; min-width: 100px;" />
+}
 @if (shoesList != null && shoesList.Any())
 {
     <table class="table">
@@ -40,11 +43,20 @@ else
     private const string base_url = "https://shoeapi.azurewebsites.net"; //https://shoeapi.azurewebsites.net/ http://localhost:5093
     private const string shoeslist_endpoint = "api/Shoe/GetShoes";
     private List<Shoe> shoesList;
+    private bool isLoading = false;
 
-	public async Task GetShoesFromApi()
-	{
-		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
-		token = token.Replace("\"", "");
-		shoesList = await getShoesService.GetShoesFromApi(token);
-	}
+    public async Task GetShoesFromApi()
+    {
+        isLoading = true;
+        var token = await LocalStorageService.GetItemAsStringAsync("authToken");
+        token = token.Replace("\"", "");
+        try
+        {
+            shoesList = await getShoesService.GetShoesFromApi(token);
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
 }

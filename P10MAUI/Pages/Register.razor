@@ -15,9 +15,9 @@
     <p>User name:</p>
     <InputText @bind-Value="userRegisterDTO.Username" id="username"></InputText>
     <p>Password:</p>
-    <InputText @bind-Value="userRegisterDTO.Password" id="password"></InputText>
+    <InputText @bind-Value="userRegisterDTO.Password" type="password" id="password"></InputText>
     <p>Confirm Password:</p>
-    <InputText @bind-Value="userRegisterDTO.ConfirmPassword" id="confirmPassword"></InputText>
+    <InputText @bind-Value="userRegisterDTO.ConfirmPassword" type="password" id="confirmPassword"></InputText>
 
     <button type="submit">Register</button>
 </EditForm>

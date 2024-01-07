@@ -1,13 +1,13 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿<div class="top-row ps-3 navbar navbar-dark" style="background-image: url('/wood.jpg'); background-size: cover;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">P10MAUI</a>
+        <a class="navbar-brand" href="">Shoes App</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+<div class="@NavMenuCssClass nav-scrollable" style="background-image: url('/wood.jpg'); background-size: cover;" @onclick="ToggleNavMenu">
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -15,18 +15,23 @@
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link" href="shoes/AddShoe">
+                <span class="oi oi-plus" aria-hidden="true"></span> Add Shoe
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            <NavLink class="nav-link" href="shoes/GetShoes">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Get Shoes
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="shoes">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Shoes
+            <NavLink class="nav-link" href="shoes/UpdateShoe">
+                <span class="oi oi-loop-circular" aria-hidden="true"></span> Update Shoe
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="shoes/DeleteShoe">
+                <span class="oi oi-circle-x" aria-hidden="true"></span> Delete Shoe
             </NavLink>
         </div>
     </nav>
