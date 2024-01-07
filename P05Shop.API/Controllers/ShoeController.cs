@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using P06Shop.Shared;
 using P06Shop.Shared.Services.ProductService;
 using P06Shop.Shared.Services.ShoeService;
+using P06Shop.Shared.Services.ShoeServices;
 using P06Shop.Shared.Shop;
 
 namespace P05Shop.API.Controllers 
@@ -16,12 +17,14 @@ namespace P05Shop.API.Controllers
         private readonly IShoeService _shoeService; //shoeservice, bêdzie o odpowiedziach dotycz¹cych butów
         private readonly IConfiguration _configuration;
         private readonly ILogger<ShoeController> _logger;
+        private readonly IValidateShoeService _validateShoeService;
 
-        public ShoeController(IShoeService shoeService, IConfiguration configuration, ILogger<ShoeController> logger)
+        public ShoeController(IShoeService shoeService, IConfiguration configuration, ILogger<ShoeController> logger, IValidateShoeService validateShoeService)
         {
             _shoeService = shoeService;
             _configuration = configuration;
             _logger = logger;
+            _validateShoeService = validateShoeService;
         }
 
         [HttpGet, Authorize]//, Authorize
@@ -45,6 +48,9 @@ namespace P05Shop.API.Controllers
             if (shoe.Name == null || shoe.Description == null || shoe.ShoeSize == null || shoe.Id.GetType() != typeof(int))
                 return BadRequest("Wrong shoe data");
 
+            if (!_validateShoeService.validateShoe(shoe.ShoeSize, shoe.Name, shoe.Description)) {
+                return BadRequest("Wrong shoe data");            
+            }
             //var addShoeEndpoint = _configuration["ApiEndpoints:AddShoeEndpoint"];
             var result = await _shoeService.CreateShoeAsync(shoe);
             if (result.Success)
@@ -89,7 +95,11 @@ namespace P05Shop.API.Controllers
         {
             if (id == null)
                 return BadRequest("Wrong shoe data");
-            updatedShoe.setId(id);
+			if (!_validateShoeService.validateShoe(updatedShoe.ShoeSize, updatedShoe.Name, updatedShoe.Description))
+			{
+				return BadRequest("Wrong shoe data");
+			}
+			updatedShoe.setId(id);
             var result = await _shoeService.UpdateShoeAsync(updatedShoe);
             if (result.Success)
                 return Ok(result);

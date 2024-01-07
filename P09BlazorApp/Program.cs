@@ -31,6 +31,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AppSettings>();
 builder.Services.AddScoped<GetShoesService>();
 builder.Services.AddScoped<AddShoeService>();
+builder.Services.AddScoped<ValidateShoeService>();
 builder.Services.AddScoped<DeleteShoeService>();
 builder.Services.AddScoped<UpdateShoeService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();

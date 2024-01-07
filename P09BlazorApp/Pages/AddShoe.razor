@@ -1,6 +1,7 @@
 ﻿@page "/shoes/AddShoe"
 @inject ILocalStorageService LocalStorageService
 @inject P06Shop.Shared.Services.ShoeServices.AddShoeService addShoesService
+@inject P06Shop.Shared.Services.ShoeServices.ValidateShoeService validateShoeService
 <h3>AddShoe</h3>
 
 <SfTextBox Placeholder='Name' Value="@shoeName" @oninput="UpdateShoeName"></SfTextBox>
@@ -8,12 +9,16 @@
 <SfTextBox Placeholder='ShoeSize' Value="@shoeSize" @oninput="UpdateShoeSize"></SfTextBox>
 <button class="btn btn-primary" @onclick="AddShoeFromApi">Add Shoe</button>
 <p>Shoe status: @shoeNameToDisplay</p>
-
+@if (isLoading)
+{
+	<img src="/loading.gif" alt="Loading..." style="width: 20vw; min-width: 100px;" />
+}
 @code {
 	private string shoeNameToDisplay = "";
 	public string shoeName { get; set; } = "";
 	public string shoeDescription { get; set; } = "";
 	public string shoeSize { get; set; } = "";
+	private bool isLoading = false;
 
 	private void UpdateShoeName(ChangeEventArgs args)
 	{
@@ -32,8 +37,20 @@
 
 	public async Task AddShoeFromApi()
 	{
+		isLoading = true;
 		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
 		token = token.Replace("\"", "");
-		shoeNameToDisplay = await addShoesService.AddShoeFromApi(shoeSize, shoeName, shoeDescription, token);
+		try
+		{
+			if (validateShoeService.validateShoe(double.Parse(shoeSize), shoeName, shoeDescription))
+			{
+				shoeNameToDisplay = await addShoesService.AddShoeFromApi(shoeSize, shoeName, shoeDescription, token);
+			}
+			else shoeNameToDisplay = "Nieprawidlowe dane buta";
+		}
+		finally
+		{
+			isLoading = false;
+		}
 	}
 }

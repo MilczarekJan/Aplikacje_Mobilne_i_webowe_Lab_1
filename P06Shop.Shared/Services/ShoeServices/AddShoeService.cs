@@ -21,7 +21,10 @@ namespace P06Shop.Shared.Services.ShoeServices
 			double shoeSizeAsDouble = double.Parse(newshoesize);
 			AddShoeDto shoeToAdd = new AddShoeDto(shoeSizeAsDouble, shoeName, shoeDescription);
 			var uri = base_url + "/" + add_endpoint;
-			_httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
+            if (!_httpClient.DefaultRequestHeaders.Contains("Authorization"))
+            {
+                _httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
+            }
 			var response = await _httpClient.PostAsJsonAsync(uri, shoeToAdd);
 			response.EnsureSuccessStatusCode();
 			var jsonResponse = await response.Content.ReadAsStringAsync();

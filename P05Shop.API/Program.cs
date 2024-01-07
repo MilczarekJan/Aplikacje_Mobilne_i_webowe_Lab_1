@@ -3,6 +3,7 @@ using P05Shop.API.Models;
 using P05Shop.API.Services.ShoeService;
 using P05Shop.API.Services.AuthService;
 using P06Shop.Shared.Services.ShoeService;
+using P06Shop.Shared.Services.ShoeServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,6 +24,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 //builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IShoeService, ShoeService>();
+builder.Services.AddScoped<IValidateShoeService, ValidateShoeService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 /*
 // Configure app settings

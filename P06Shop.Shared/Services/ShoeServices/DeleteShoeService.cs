@@ -16,8 +16,11 @@ namespace P06Shop.Shared.Services.ShoeServices
 		public async Task<string> DeleteShoeFromApi(string shoeId, string token)
 		{
 			var uri = base_url + "/" + string.Format(delete_endpoint, shoeId);
-			_httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
-			var response = await _httpClient.DeleteAsync(uri); //"http://localhost:5093/api/Shoe/GetShoe/1"
+            if (!_httpClient.DefaultRequestHeaders.Contains("Authorization"))
+            {
+                _httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", token));
+            }
+            var response = await _httpClient.DeleteAsync(uri); //"http://localhost:5093/api/Shoe/GetShoe/1"
 			var jsonResponse = await response.Content.ReadAsStringAsync();
 			var responseObj = JsonConvert.DeserializeObject<JObject>(jsonResponse);
 			bool success = responseObj.Value<bool>("success");
