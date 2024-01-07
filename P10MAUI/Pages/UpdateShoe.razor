@@ -1,25 +1,36 @@
 ﻿@page "/shoes/UpdateShoe"
-@using P06Shop.Shared.Services.ShoeServices;
 @inject ILocalStorageService LocalStorageService
-@inject UpdateShoeService updateShoeService
+@inject P06Shop.Shared.Services.ShoeServices.UpdateShoeService updateShoesService
+@inject P06Shop.Shared.Services.ShoeServices.ValidateShoeService validateShoeService
 <h3>Update Shoe</h3>
 
 <SfTextBox Placeholder='Id' Value="@shoeId" @oninput="UpdateShoeId"></SfTextBox>
 <SfTextBox Placeholder='Name' Value="@shoeName" @oninput="UpdateShoeName"></SfTextBox>
 <SfTextBox Placeholder='Description' Value="@shoeDescription" @oninput="UpdateShoeDescription"></SfTextBox>
 <SfTextBox Placeholder='ShoeSize' Value="@shoeSize" @oninput="UpdateShoeSize"></SfTextBox>
-<button class="btn btn-primary" @onclick="showUpdateStatus">Update Shoe</button>
+<button class="btn btn-primary" @onclick="UpdateShoeFromApi">Update Shoe</button>
 <p>Shoe status: @shoeNameToDisplay</p>
+@if (isLoading)
+{
+	<img src="/loading.gif" alt="Loading..." style="width: 20vw; min-width: 100px;" />
+}
 
 @code {
 	//IMyApiService _shoeApiClient = new MyApiService();
 	private readonly HttpClient _httpClient = new HttpClient();
+	private const string base_url = "http://localhost:5093";
+	private const string shoeslist_endpoint = "api/Shoe/GetShoes";
+	private const string shoe_endpoint = "api/Shoe/GetShoe/{0}";
+	private const string delete_endpoint = "api/Shoe/DeleteShoe/{0}";
+	private const string add_endpoint = "api/Shoe/newShoe";
+	private const string update_endpoint = "api/Shoe/UpdateShoe/{0}";
 
 	private string shoeNameToDisplay = "";
 	public string shoeName { get; set; } = "";
 	public string shoeDescription { get; set; } = "";
 	public string shoeSize { get; set; } = "";
 	public string shoeId { get; set; } = "";
+	private bool isLoading = false;
 
 	private void UpdateShoeId(ChangeEventArgs args)
 	{
@@ -41,10 +52,25 @@
 		shoeSize = args.Value.ToString();
 	}
 
-	public async Task showUpdateStatus()
+	public async Task UpdateShoeFromApi()
 	{
+		isLoading = true;
 		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
 		token = token.Replace("\"", "");
-		shoeNameToDisplay = await updateShoeService.UpdateShoeFromApi(shoeId, shoeName, shoeDescription, shoeSize, token);
+		try
+		{
+			if (validateShoeService.validateShoe(double.Parse(shoeSize), shoeName, shoeDescription))
+			{
+				shoeNameToDisplay = await updateShoesService.UpdateShoeFromApi(shoeId, shoeName, shoeDescription, shoeSize, token);
+			}
+			else
+			{
+				shoeNameToDisplay = "Invalid shoe data";
+			}
+		}
+		finally
+		{
+			isLoading = false;
+		}
 	}
 }

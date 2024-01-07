@@ -44,7 +44,8 @@ namespace P10MAUI
 			builder.Services.AddTransient<AddShoeService>();
 			builder.Services.AddTransient<DeleteShoeService>();
 			builder.Services.AddTransient<UpdateShoeService>();
-            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+			builder.Services.AddTransient<ValidateShoeService>();
+			builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
             builder.Services.AddHttpClient<IAuthService, AuthService>(client => client.BaseAddress = uriBuilder.Uri);                                                                                                           
             builder.Services.AddSyncfusionBlazor();
             return builder.Build();

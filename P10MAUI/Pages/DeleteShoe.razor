@@ -1,25 +1,37 @@
 ﻿@page "/shoes/DeleteShoe"
-@using P06Shop.Shared.Services.ShoeServices;
 @inject ILocalStorageService LocalStorageService
-@inject DeleteShoeService deleteShoeService
+@inject P06Shop.Shared.Services.ShoeServices.DeleteShoeService deleteShoesService
 
 <h3>Delete Shoe</h3>
 <SfTextBox Placeholder='Id' Value="@shoeId" @oninput="UpdateShoeId"></SfTextBox>
-<button class="btn btn-primary" @onclick="GetDeleteMessage">Delete Shoe</button>
+<button class="btn btn-primary" @onclick="DeleteShoeFromApi">Delete Shoe</button>
 <p>Shoe status: @shoeNameToDisplay</p>
-
+@if (isLoading)
+{
+	<img src="/loading.gif" alt="Loading..." style="width: 20vw; min-width: 100px;" />
+}
 @code {
 	private string shoeNameToDisplay = "";
 	public string shoeId { get; set; } = "";
+	private bool isLoading = false;
 
 	private void UpdateShoeId(ChangeEventArgs args)
 	{
 		shoeId = args.Value.ToString();
 	}
-	public async Task GetDeleteMessage()
+
+	public async Task DeleteShoeFromApi()
 	{
+		isLoading = true;
 		var token = await LocalStorageService.GetItemAsStringAsync("authToken");
 		token = token.Replace("\"", "");
-		shoeNameToDisplay = await deleteShoeService.DeleteShoeFromApi(shoeId, token);
+		try
+		{
+			shoeNameToDisplay = await deleteShoesService.DeleteShoeFromApi(shoeId, token);
+		}
+		finally
+		{
+			isLoading = false;
+		}
 	}
 }
